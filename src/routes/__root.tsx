@@ -26,7 +26,16 @@ function RootComponent() {
                 </li>
                 <li>
                     <Link to="/pokemon" activeProps={activeProps}>
-                        Pokemons
+                        {({ isActive }) => <>Pokemons {isActive && "~"} </>}
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/search" activeProps={activeProps} search={{
+                        query: "laptop",
+                        hasDiscount: true,
+                        categories: ["electronics", "home"]
+                    }}>
+                        {({ isActive }) => <>Search {isActive && "~"} </>}
                     </Link>
                 </li>
             </ul>
