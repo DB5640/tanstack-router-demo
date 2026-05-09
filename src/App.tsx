@@ -1,25 +1,25 @@
-import { useState } from 'react'
-import './App.css'
-import { createRouter, RouterProvider } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
+import { createRouter, RouterProvider } from "@tanstack/react-router";
+import "./App.css";
+import useAuth from "./hooks/useAuth";
+import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({
-  routeTree
-})
+	routeTree,
+	context: {
+		authentication: undefined!,
+	},
+});
 
-declare module "@tanstack/react-router"{
-  interface Register{
-    router: typeof router
-  }
+declare module "@tanstack/react-router" {
+	interface Register {
+		router: typeof router;
+	}
 }
 
 function App() {
-  const [count, setCount] = useState(0)
+	const authentication = useAuth();
 
-  return (
-    <RouterProvider router={router} />
-
-  )
+	return <RouterProvider router={router} context={{ authentication }} />;
 }
 
-export default App
+export default App;
